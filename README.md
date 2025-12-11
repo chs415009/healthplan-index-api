@@ -183,7 +183,7 @@ curl http://localhost:9200/plans/_count
 
 2. **Postman Configuration**
    
-   ![Postman OAuth Setup](docs/images/postman-oauth.png)
+   ![Postman OAuth Setup](images/postman-oauth.png)
    
    | Field | Value |
    |-------|-------|
@@ -476,7 +476,7 @@ Medical insurance plans are **frequently updated** (new services, price changes)
 
 ### OAuth 2.0 Authentication Flow
 
-![Postman OAuth](images/postman-oauth.png)
+![Postman OAuth](images/postman-oauth2.png)
 
 *Google OAuth 2.0 integration with automatic token management*
 
