@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["objectId", "objectType", "_org", "planType", "creationDate", "planCostShares"],
+  "properties": {
+    "objectId": {
+      "type": "string"
+    },
+    "objectType": {
+      "type": "string",
+      "enum": ["plan"]
+    },
+    "_org": {
+      "type": "string"
+    },
+    "planType": {
+      "type": "string"
+    },
+    "creationDate": {
+      "type": "string"
+    },
+    "planCostShares": {
+      "type": "object",
+      "required": ["objectId", "objectType", "_org", "deductible", "copay"],
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string",
+          "enum": ["membercostshare"]
+        },
+        "_org": {
+          "type": "string"
+        },
+        "deductible": {
+          "type": "integer"
+        },
+        "copay": {
+          "type": "integer"
+        }
+      }
+    },
+    "linkedPlanServices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["objectId", "objectType", "_org", "linkedService", "planserviceCostShares"],
+        "properties": {
+          "objectId": {
+            "type": "string"
+          },
+          "objectType": {
+            "type": "string",
+            "enum": ["planservice"]
+          },
+          "_org": {
+            "type": "string"
+          },
+          "linkedService": {
+            "type": "object",
+            "required": ["objectId", "objectType", "_org", "name"],
+            "properties": {
+              "objectId": {
+                "type": "string"
+              },
+              "objectType": {
+                "type": "string",
+                "enum": ["service"]
+              },
+              "_org": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "planserviceCostShares": {
+            "type": "object",
+            "required": ["objectId", "objectType", "_org", "deductible", "copay"],
+            "properties": {
+              "objectId": {
+                "type": "string"
+              },
+              "objectType": {
+                "type": "string",
+                "enum": ["membercostshare"]
+              },
+              "_org": {
+                "type": "string"
+              },
+              "deductible": {
+                "type": "integer"
+              },
+              "copay": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
