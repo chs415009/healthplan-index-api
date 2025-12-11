@@ -23,7 +23,6 @@
 - [Sample Data](#-sample-data)
 - [Project Structure](#-project-structure)
 - [Design Rationale](#-design-rationale)
-- [Screenshots](#-screenshots)
 
 ---
 
@@ -92,7 +91,7 @@ graph TB
     style MongoDB fill:#47A248,color:#fff
     style ES fill:#005571,color:#fff
     style Queue fill:#FF6600,color:#fff
-    style Worker fill:#00D8FF
+    style Worker fill:#00BEE0
 ```
 
 **Data Flow:** Client → API → MongoDB (instant) → Queue → Worker → Elasticsearch (background)
@@ -183,8 +182,6 @@ curl http://localhost:9200/plans/_count
 
 2. **Postman Configuration**
    
-   ![Postman OAuth Setup](images/postman-oauth.png)
-   
    | Field | Value |
    |-------|-------|
    | **Type** | OAuth 2.0 |
@@ -193,7 +190,9 @@ curl http://localhost:9200/plans/_count
    | **Client ID** | Your Google Client ID |
    | **Scope** | `openid email profile` |
    
-3. **Get Token** → Authenticate → **Use Token**
+   ![Postman OAuth Setup](images/postman-oauth.png)
+   
+4. **Get Token** → Authenticate → **Use Token**
 
 ---
 
@@ -278,7 +277,7 @@ curl -X POST "http://localhost:9200/plans/_search?pretty" \
 
 Returns: **Child documents** (PlanCostShares, LinkedPlanServices) of the Plan
 
-![Parent-Child Query Results](docs/images/parent-child-query.png)
+![Parent-Child Query Results](images/parent-child-query.png)
 
 ---
 
@@ -465,30 +464,6 @@ Medical insurance plans are **frequently updated** (new services, price changes)
 
 ---
 
-## 📸 Screenshots
-
-### RabbitMQ Message Queues
-
-![RabbitMQ Overview](images/rabbitmq-queues1.png)
-![RabbitMQ Queues](images/rabbitmq-queues2.png)
-
-*Three durable queues handling async indexing operations*
-
-### OAuth 2.0 Authentication Flow
-
-![Postman OAuth](images/postman-oauth2.png)
-
-*Google OAuth 2.0 integration with automatic token management*
-
-### Parent-Child Query Example
-
-![Parent-Child Query](images/parent-child-query1.png)
-![Parent-Child Result](images/parent-child-query2.png)
-
-*Complex relational query using has_child syntax - returns parent documents based on child conditions*
-
----
-
 ## 🔗 Useful Commands
 
 ### View MongoDB Data
@@ -523,6 +498,7 @@ URL: http://localhost:15672
 Username: admin
 Password: admin123
 ```
+![RabbitMQ Overview](images/rabbitmq-queues.png)
 
 ---
 
