@@ -257,6 +257,43 @@ curl -X POST "http://localhost:9200/plans/_search?pretty" \
 
 Returns: **Parent documents** (Plans) that have children matching the query
 
+```bash
+{
+  "took" : 100,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "plans",
+        "_id" : "demo-final-001",
+        "_score" : 1.0,
+        "_source" : {
+          "planType" : "inNetwork",
+          "_org" : "example.com",
+          "creationDate" : "12-12-2017",
+          "plan_join" : {
+            "name" : "plan"
+          },
+          "objectId" : "demo-final-001",
+          "objectType" : "plan"
+        }
+      }
+    ]
+  }
+}
+```
+
 #### 2. Find All Children of a Plan (has_parent)
 
 ```bash
@@ -277,7 +314,90 @@ curl -X POST "http://localhost:9200/plans/_search?pretty" \
 
 Returns: **Child documents** (PlanCostShares, LinkedPlanServices) of the Plan
 
-![Parent-Child Query Results](images/parent-child-query.png)
+```bash
+{
+  "took" : 32,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 3,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "plans",
+        "_id" : "1234vxc2324sdf-501",
+        "_score" : 1.0,
+        "_routing" : "demo-final-001",
+        "_source" : {
+          "deductible" : 2000,
+          "_org" : "example.com",
+          "copay" : 23,
+          "plan_join" : {
+            "name" : "planCostShares",
+            "parent" : "demo-final-001"
+          },
+          "objectId" : "1234vxc2324sdf-501",
+          "objectType" : "membercostshare"
+        }
+      },
+      {
+        "_index" : "plans",
+        "_id" : "27283xvx9asdff-504",
+        "_score" : 1.0,
+        "_routing" : "demo-final-001",
+        "_source" : {
+          "linkedService" : {
+            "name" : "Yearly physical",
+            "objectId" : "1234520xvc30asdf-502"
+          },
+          "planserviceCostShares" : {
+            "deductible" : 10,
+            "copay" : 0
+          },
+          "_org" : "example.com",
+          "plan_join" : {
+            "name" : "linkedPlanService",
+            "parent" : "demo-final-001"
+          },
+          "objectId" : "27283xvx9asdff-504",
+          "objectType" : "planservice"
+        }
+      },
+      {
+        "_index" : "plans",
+        "_id" : "27283xvx9sdf-507",
+        "_score" : 1.0,
+        "_routing" : "demo-final-001",
+        "_source" : {
+          "linkedService" : {
+            "name" : "well baby",
+            "objectId" : "1234520xvc30sfs-505"
+          },
+          "planserviceCostShares" : {
+            "deductible" : 10,
+            "copay" : 175
+          },
+          "_org" : "example.com",
+          "plan_join" : {
+            "name" : "linkedPlanService",
+            "parent" : "demo-final-001"
+          },
+          "objectId" : "27283xvx9sdf-507",
+          "objectType" : "planservice"
+        }
+      }
+    ]
+  }
+}
+```
 
 ---
 
