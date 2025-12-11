@@ -134,7 +134,7 @@ docker-compose up -d
 ./mvnw spring-boot:run
 ```
 
-### 3. Test API
+### 3. Test API (e.g. Create a Plan)
 
 **Get OAuth token** (see [OAuth 2.0 Setup](#-oauth-20-setup)), then:
 
@@ -143,21 +143,67 @@ curl -X POST http://localhost:8080/api/v1/plan \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -d '{
-    "objectId": "plan-001",
-    "objectType": "plan",
-    "_org": "example.com",
-    "planType": "inNetwork",
-    "creationDate": "2025-12-06",
-    "planCostShares": {
-      "deductible": 2000,
-      "copay": 23,
-      "objectId": "costshare-001",
-      "objectType": "membercostshare",
-      "_org": "example.com"
-    },
-    "linkedPlanServices": [...]
+    ...
   }'
 ```
+
+**Sample data** (Body for POST API):
+```bash
+{
+	"planCostShares": {
+		"deductible": 2000,
+		"_org": "example.com",
+		"copay": 23,
+		"objectId": "1234vxc2324sdf-501",
+		"objectType": "membercostshare"
+		
+	},
+	"linkedPlanServices": [{
+		"linkedService": {
+			"_org": "example.com",
+			"objectId": "1234520xvc30asdf-502",
+			"objectType": "service",
+			"name": "Yearly physical"
+		},
+		"planserviceCostShares": {
+			"deductible": 10,
+			"_org": "example.com",
+			"copay": 0,
+			"objectId": "1234512xvc1314asdfs-503",
+			"objectType": "membercostshare"
+		},
+		"_org": "example.com",
+		"objectId": "27283xvx9asdff-504",
+		"objectType": "planservice"
+	}, {
+		"linkedService": {
+			"_org": "example.com",
+			"objectId": "1234520xvc30sfs-505",
+			"objectType": "service",
+			"name": "well baby"
+		},
+		"planserviceCostShares": {
+			"deductible": 10,
+			"_org": "example.com",
+			"copay": 175,
+			"objectId": "1234512xvc1314sdfsd-506",
+			"objectType": "membercostshare"
+		},
+		
+		"_org": "example.com",
+		
+		"objectId": "27283xvx9sdf-507",
+		"objectType": "planservice"
+	}],
+
+	"_org": "example.com",
+	"objectId": "demo-final-001",
+	"objectType": "plan",
+	"planType": "inNetwork",
+	"creationDate": "12-12-2017"
+}
+```
+
 
 **Verify storage:**
 ```bash
@@ -235,7 +281,7 @@ Plan (parent)
   └─ LinkedPlanServices (children)
 ```
 
-### Query Examples
+### Query Examples (using sample data)
 
 #### 1. Find Plans with Free Services (has_child)
 
