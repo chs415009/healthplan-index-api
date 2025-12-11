@@ -143,67 +143,11 @@ curl -X POST http://localhost:8080/api/v1/plan \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -d '{
-    ...
+    ... see below (Complete plan body)
   }'
 ```
 
-**Sample data** (Body for POST API):
-```bash
-{
-	"planCostShares": {
-		"deductible": 2000,
-		"_org": "example.com",
-		"copay": 23,
-		"objectId": "1234vxc2324sdf-501",
-		"objectType": "membercostshare"
-		
-	},
-	"linkedPlanServices": [{
-		"linkedService": {
-			"_org": "example.com",
-			"objectId": "1234520xvc30asdf-502",
-			"objectType": "service",
-			"name": "Yearly physical"
-		},
-		"planserviceCostShares": {
-			"deductible": 10,
-			"_org": "example.com",
-			"copay": 0,
-			"objectId": "1234512xvc1314asdfs-503",
-			"objectType": "membercostshare"
-		},
-		"_org": "example.com",
-		"objectId": "27283xvx9asdff-504",
-		"objectType": "planservice"
-	}, {
-		"linkedService": {
-			"_org": "example.com",
-			"objectId": "1234520xvc30sfs-505",
-			"objectType": "service",
-			"name": "well baby"
-		},
-		"planserviceCostShares": {
-			"deductible": 10,
-			"_org": "example.com",
-			"copay": 175,
-			"objectId": "1234512xvc1314sdfsd-506",
-			"objectType": "membercostshare"
-		},
-		
-		"_org": "example.com",
-		
-		"objectId": "27283xvx9sdf-507",
-		"objectType": "planservice"
-	}],
-
-	"_org": "example.com",
-	"objectId": "demo-final-001",
-	"objectType": "plan",
-	"planType": "inNetwork",
-	"creationDate": "12-12-2017"
-}
-```
-
+***- Complete plan body*** : [Sample Data](#-sample-data) 
 
 **Verify storage:**
 ```bash
@@ -451,9 +395,6 @@ Returns: **Child documents** (PlanCostShares, LinkedPlanServices) of the Plan
 
 ### Complete Plan JSON
 
-<details>
-<summary>Click to expand full Plan JSON example</summary>
-
 ```json
 {
   "planCostShares": {
@@ -508,8 +449,6 @@ Returns: **Child documents** (PlanCostShares, LinkedPlanServices) of the Plan
   "creationDate": "2025-12-06"
 }
 ```
-
-</details>
 
 ### Storage Breakdown
 
